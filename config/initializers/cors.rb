@@ -7,8 +7,13 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    # origins 'your-frontend-domain.com', 'another-trusted-domain.com' 
-    origins "*"
+    
+    if Rails.env.development? || Rails.env.test?
+      origins "*"
+    else
+      # TODO: set the origins to allow accessing resources in production
+      # origins 'https://my-app.com', 'another-trusted-comain.com'
+    end
 
     resource "*",
       headers: :any,
