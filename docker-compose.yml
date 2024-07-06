@@ -1,0 +1,28 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bash -c "rm -f /usr/src/vue_rails_api/tmp/pids/server.pid && rails s -b '0.0.0.0'"
+    volumes:
+      - ".:/usr/src/vue_rails_api"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file: ".env.development.local"
+  db:
+    image: postgres:12.18
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_log:/var/log/postgresql
+    healthcheck:
+      # The `-h localhost` is a MUST, else we'll pass the health test during initialisation
+      test: pg_isready -h localhost -U $$POSTGRES_USER
+      interval: 2s
+      timeout: 5s
+      retries: 15
+    env_file: ".env.development.local"
+volumes:
+  postgres_data:
+  postgres_log:
