@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/ohbarye/route_mechanic.git
+  revision: 0829d9d02199efbbbfdfa4b1ee08a5e9bea5f5e6
+  specs:
+    route_mechanic (0.2.1)
+      actionpack (>= 4.2)
+      regexp-examples (>= 1.5, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -104,9 +112,6 @@ GEM
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     date (3.3.4)
-    debug (1.9.2)
-      irb (~> 1.10)
-      reline (>= 0.3.8)
     diff-lcs (1.5.1)
     dotenv (3.1.2)
     drb (2.2.1)
@@ -222,7 +227,10 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
+    regexp-examples (1.6.0)
+      regexp_property_values (~> 1.5)
     regexp_parser (2.9.2)
+    regexp_property_values (1.5.2)
     reline (0.5.9)
       io-console (~> 0.5)
     rspec-core (3.13.0)
@@ -242,6 +250,8 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.1)
+    shoulda-matchers (6.2.0)
+      activesupport (>= 5.2.0)
     stringio (3.1.1)
     thor (1.3.1)
     timeout (0.4.1)
@@ -268,7 +278,6 @@ DEPENDENCIES
   bootsnap
   capybara
   database_cleaner
-  debug
   dotenv
   factory_bot_rails
   faker
@@ -280,7 +289,9 @@ DEPENDENCIES
   puma (>= 5.0)
   rack-cors
   rails (~> 7.1.3, >= 7.1.3.4)
+  route_mechanic!
   rspec-rails
+  shoulda-matchers
   tzinfo-data
 
 RUBY VERSION

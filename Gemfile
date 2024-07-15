@@ -35,23 +35,24 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
 
-group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
-end
-
-group :development do
+group :development, :test  do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-byebug'
+end
+
+group :test do
   gem 'rspec-rails'
   gem "factory_bot_rails"
   gem 'capybara'
   gem 'database_cleaner'
   gem "faker"
+  gem 'shoulda-matchers'
+  gem 'route_mechanic', github: "ohbarye/route_mechanic"
 end
+
 
 # Use Json Web Token (JWT) for token based authentication
 gem 'jwt'

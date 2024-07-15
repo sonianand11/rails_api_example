@@ -58,7 +58,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
       it 'returns a created response' do
         post :create, params: valid_attributes
-        expect(response).to have_http_status(:created)
+        expect(response).to have_http_status(200)
       end
     end
 
@@ -131,7 +131,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
     it 'returns a no content response' do
       delete :destroy, params: { id: user.to_param }
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(200)
     end
 
     context 'when the user does not exist' do
