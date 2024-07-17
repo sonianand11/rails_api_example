@@ -6,13 +6,12 @@ class Api::V1::CommentsController < ApplicationController
   # GET /comments
   def index
     @comments = @post.comments
-
-    render json: @comments
+    render json: Panko::ArraySerializer.new(@comments, each_serializer: CommentSerializer).to_json
   end
 
   # GET /comments/1
   def show
-    render json: @comment
+    render json: CommentSerializer.new.serialize(@comment).to_json
   end
 
   # POST /comments
@@ -21,7 +20,7 @@ class Api::V1::CommentsController < ApplicationController
     @comment.user_id = @current_user.id
     
     if @comment.save
-      render json: @comment, status: :created
+      render json: CommentSerializer.new.serialize(@comment).to_json, status: :created
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -30,7 +29,7 @@ class Api::V1::CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   def update
     if @comment.update(comment_params)
-      render json: @comment
+      render json: CommentSerializer.new.serialize(@comment).to_json
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -38,7 +37,11 @@ class Api::V1::CommentsController < ApplicationController
 
   # DELETE /comments/1
   def destroy
-    @comment.destroy!
+    if @comment.destroy
+      render json: CommentSerializer.new.serialize(@comment).to_json
+    else
+      render json: @comment.errors, status: :unprocessable_entity
+    end
   end
 
   private

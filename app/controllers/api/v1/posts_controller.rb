@@ -4,23 +4,24 @@ class Api::V1::PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
-
-    render json: @posts
+    @posts = Post.includes(:comments, :user)
+    
+    render json: Panko::ArraySerializer.new(@posts, each_serializer: PostSerializer).to_json
   end
 
   # GET /posts/1
   def show
-    render json: @post
+    render json: PostSerializer.new.serialize(@post).to_json
   end
 
   # POST /posts
   def create
     @post = Post.new(post_params)
     @post.user_id = @current_user.id
+    @post.medias.attach(post_params[:medias])
 
     if @post.save
-      render json: @post, status: :created
+      render json: PostSerializer.new.serialize(@post).to_json, status: :created
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -28,8 +29,10 @@ class Api::V1::PostsController < ApplicationController
 
   # PATCH/PUT /posts/1
   def update
+    @post.medias.attach(post_params[:medias])
+
     if @post.update(post_params)
-      render json: @post
+      render json: PostSerializer.new.serialize(@post).to_json
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -39,7 +42,7 @@ class Api::V1::PostsController < ApplicationController
   def destroy
     
     if @post.destroy
-      render json: @post
+      render json: PostSerializer.new.serialize(@post).to_json
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -53,6 +56,6 @@ class Api::V1::PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :description)
+      params.require(:post).permit(:title, :description,medias:[])
     end
 end

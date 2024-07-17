@@ -6,7 +6,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
   let(:post_obj) { create(:post, user: user) }
   let(:valid_attributes) { { body: 'Sample Comment' } }
   let(:invalid_attributes) { { body: '' } }
-  let!(:comment) { create(:comment, post: post_obj, user: user) }
+  let!(:comment) { create(:comment, commentable: post_obj, user: user) }
   let(:token) { JsonWebToken.encode({user_id: user.id}, (Time.now + 24.hours.to_i) ) }
   let(:valid_headers) { {'x-token': token} }
 
@@ -106,7 +106,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
 
     it 'returns a success response' do
       delete :destroy, params: { post_id: post_obj.id, id: comment.id }
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:ok)
     end
   end
 end

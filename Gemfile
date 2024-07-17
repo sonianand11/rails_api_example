@@ -50,7 +50,7 @@ group :test do
   gem 'database_cleaner'
   gem "faker"
   gem 'shoulda-matchers'
-  gem 'route_mechanic', github: "ohbarye/route_mechanic"
+  # gem 'route_mechanic', github: "ohbarye/route_mechanic"
 end
 
 
@@ -62,3 +62,6 @@ gem 'bcrypt'
 
 # Shim to load environment variables from .env into ENV in development.
 gem 'dotenv'
+gem "image_processing"
+gem 'oj'
+gem "panko_serializer"

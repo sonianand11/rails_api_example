@@ -7,27 +7,27 @@ RSpec.describe Comment, type: :model do
 
   describe 'associations' do
     it { should belong_to(:user) }
-    it { should belong_to(:post) }
+    it { should belong_to(:commentable) }
   end
 
   describe 'validations' do
     it 'is valid with valid attributes' do
-      comment = Comment.new(body: 'This is a comment', user: user, post: post)
+      comment = Comment.new(body: 'This is a comment', user: user, commentable: post)
       expect(comment).to be_valid
     end
 
     it 'is not valid without a body' do
-      comment = Comment.new(body: nil, user: user, post: post)
+      comment = Comment.new(body: nil, user: user, commentable: post)
       expect(comment).not_to be_valid
     end
 
     it 'is not valid without a user' do
-      comment = Comment.new(body: 'This is a comment', user: nil, post: post)
+      comment = Comment.new(body: 'This is a comment', user: nil, commentable: post)
       expect(comment).not_to be_valid
     end
 
     it 'is not valid without a post' do
-      comment = Comment.new(body: 'This is a comment', user: user, post: nil)
+      comment = Comment.new(body: 'This is a comment', user: user, commentable: nil)
       expect(comment).not_to be_valid
     end
   end
