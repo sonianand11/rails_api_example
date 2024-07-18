@@ -1,5 +1,11 @@
 name: Run RSpec tests
-on: [push]
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - '*'
 jobs:
   run-rspec-tests:
     runs-on: ubuntu-latest
