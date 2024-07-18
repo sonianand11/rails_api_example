@@ -62,6 +62,11 @@ gem 'bcrypt'
 
 # Shim to load environment variables from .env into ENV in development.
 gem 'dotenv'
-gem "image_processing"
+
+# A fast JSON parser and Object marshaller as a Ruby gem.
 gem 'oj'
+# JSON Serializer for response
 gem "panko_serializer"
+
+# for image processing. Used by ActiveStorage
+gem "image_processing"
