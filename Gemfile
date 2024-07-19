@@ -78,3 +78,6 @@ gem 'panko_serializer', '~> 0.8.2'
 
 # for image processing. Used by ActiveStorage
 gem 'image_processing', '~> 1.12.2'
+
+# Fix security issue: URL: https://github.com/rack/rack/security/advisories/GHSA-cj83-2ww7-mvq7
+gem 'rack', '~> 3.1.7'
