@@ -18,7 +18,7 @@ RSpec.describe "/comments", type: :request do
   let(:valid_attributes) { { body: 'Sample Comment' } }
   let(:invalid_attributes) { { body: ''} }
   let!(:comment) { create(:comment, commentable: post_obj, user: user) }
-  let(:valid_headers) { {'x-token': JsonWebToken.encode({user_id: user.id}, (Time.now + 24.hours.to_i) )} }
+  let(:valid_headers) { {'x-token': JsonWebToken.encode({user_id: user.id}, (Time.zone.now + 24.hours.to_i) )} }
   let(:new_attributes) { { body: 'Sample Comment Update' }  }
   
   describe "GET /index" do

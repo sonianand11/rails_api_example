@@ -6,7 +6,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
   let(:valid_attributes) { { title: 'Sample Title', description: 'Sample Description' } }
   let(:invalid_attributes) { { title: '', description: '' } }
   let!(:post_obj) { create(:post, user: user) }
-  let(:token) { JsonWebToken.encode({user_id: user.id}, (Time.now + 24.hours.to_i) ) }
+  let(:token) { JsonWebToken.encode({user_id: user.id}, (Time.zone.now + 24.hours.to_i) ) }
   let(:valid_headers) { {'x-token': token} }
 
   before do

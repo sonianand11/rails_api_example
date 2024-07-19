@@ -20,7 +20,7 @@ RSpec.describe "/posts", type: :request do
   let(:post_obj) {create(:post, user_id: user.id)}
   let(:valid_attributes) { { title: 'Sample Title', description: 'Sample Description' } }
   let(:invalid_attributes) { { title: '', description: '' } }
-  let(:token) { JsonWebToken.encode({user_id: user.id}, (Time.now + 24.hours.to_i) ) }
+  let(:token) { JsonWebToken.encode({user_id: user.id}, (Time.zone.now + 24.hours.to_i) ) }
   let(:valid_headers) { {'x-token': token} }
   let(:new_attributes) { { title: 'Sample Title Update' }  }
 
